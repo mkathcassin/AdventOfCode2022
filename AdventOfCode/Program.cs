@@ -3,4 +3,4 @@ using AdventOfCode;
 using System.Xml;
 
 
-Day5.GetTopCrates();
+Day6.FindMessage();
