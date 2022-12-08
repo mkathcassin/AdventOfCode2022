@@ -49,7 +49,7 @@ namespace AdventOfCode
             return positions;
         }  
 
-        private static SortedDictionary<int, List<char>> moveCrates(SortedDictionary<int, List<char>> CrateLocations, List<int[]> moveCommands)
+        private static SortedDictionary<int, List<char>> moveCratesInGroup(SortedDictionary<int, List<char>> CrateLocations, List<int[]> moveCommands)
         {
             var cl = CrateLocations;
             foreach (var command in moveCommands)
@@ -57,15 +57,30 @@ namespace AdventOfCode
                 var movingCrates = cl[command[1]-1].GetRange(0, command[0]);
                 cl[command[1]-1].RemoveRange(0, command[0]);
                 cl[command[2]-1].InsertRange(0, movingCrates);
-                DebugCrates(cl);
             }
             return cl;
         }
 
+        private static SortedDictionary<int, List<char>> moveCrates(SortedDictionary<int, List<char>> CrateLocations, List<int[]> moveCommands)
+        {
+            foreach(var command in moveCommands)
+            {
+                for (int i = 0; i < command[0]; i++)
+                {
+                    var crate = CrateLocations[command[1]-1][0];
+                    CrateLocations[command[1]-1].RemoveAt(0);
+                    CrateLocations[command[2]-1].Insert(0, crate);
+                    DebugCrates(CrateLocations);
+                }
+            }
+            DebugCrates(CrateLocations);
+            return CrateLocations;
+        }
+
         public static void GetTopCrates()
         {
-            var finalLocations = moveCrates(initCrateLocations("./Day5/CrateData.txt"), moveCommands("./Day5/CrateData.txt"));
-            for (int i = 1; i < finalLocations.Count; i++)
+            var finalLocations = moveCratesInGroup(initCrateLocations("./Day5/CrateData.txt"), moveCommands("./Day5/CrateData.txt"));
+            for (int i = 0; i < finalLocations.Count; i++)
             {
                 Console.Write(finalLocations[i][0]);
             }
