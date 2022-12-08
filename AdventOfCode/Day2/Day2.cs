@@ -4,9 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using static AdventOfCode.Day2.Day2;
 
-namespace AdventOfCode.Day2
+namespace AdventOfCode
 {
     // Scissors Beats Paper
     // Paper Beats Rock
