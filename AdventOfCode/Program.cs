@@ -3,4 +3,4 @@ using AdventOfCode;
 using System.Xml;
 
 
-Day6.FindMessage();
+Day7.whatToDelete();
